@@ -12,7 +12,6 @@ int main()
 		s=s+((n%10)*pow(2,k++));
 		n=n/10;
 	} 
-	
 	cout<<s;
 	return 0;
 } 
