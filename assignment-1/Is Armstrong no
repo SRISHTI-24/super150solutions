@@ -1,0 +1,27 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+int main() {
+	long long int n;
+	cin>>n;
+	int c=0;
+	int m=n;
+	int m1=n;
+	while(m!=0)
+	{
+		int a=m%10;
+		m=m/10;
+		c++;
+	}
+	long long int s=0;
+	while(n!=0)
+	{
+		s=s+pow((n%10),c);
+		n=n/10;
+	}
+	if(s==m1)
+	cout<<"true";
+	else 
+	cout<<"false";
+	return 0;
+}
