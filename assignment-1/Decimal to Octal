@@ -1,0 +1,17 @@
+#include<iostream>
+using namespace std;
+int main() {
+	int n;
+	cin>>n;
+	int on=0, cv=1;
+	int dn=n;
+	while(dn!=0)
+	{
+		int r = dn%8;
+		on= on + r*cv;
+		cv = cv*10;
+		dn=dn/8;
+	}
+	cout<<on;
+	return 0;
+}
