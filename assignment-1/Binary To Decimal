@@ -1,0 +1,16 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+int main() {
+	long long int n;
+	cin>>n;
+	long long int s=0;
+	int k=0;
+	while(n!=0)
+	{
+		s=s+((n%10)*pow(2,k++));
+		n=n/10;
+	}
+	cout<<s;
+	return 0;
+}
