@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+int main() {
+	int n;
+	cin>>n;
+	int r=1;
+	int s=-1;
+	int st=n;
+	while(r<=(2*n)-1)
+	{
+		int i=1;
+		while(i<=st)
+		{
+			cout<<"*";
+			i++;
+		}
+		int j=1;
+		while(j<=s)
+		{
+			cout<<" ";
+			j++;
+		}
+		if(r==1 || r==(2*n)-1)
+		i=2;
+		else
+		 i=1;
+		 while(i<=st)
+		 {
+			 cout<<"*";
+			 i++;
+		 }
+		 r++;
+		 if(r<=n)
+		 {
+			 s=s+2;
+			 st--;
+		 }
+		 else
+		 {
+			 s=s-2;
+			 st++;
+		 }
+		 cout<<"\n";
+	}
+	return 0;
+}
