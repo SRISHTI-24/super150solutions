@@ -1,0 +1,12 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+		Scanner s = new Scanner(System.in);
+		int sb=s.nextInt();
+		int db=s.nextInt();
+		int n=s.nextInt();
+		String str=""+n;
+		System.out.println(Integer.toString(Integer.parseInt(str,sb),db));
+
+	    }
+}
