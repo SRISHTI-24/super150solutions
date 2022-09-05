@@ -1,0 +1,29 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc = new Scanner(System.in);
+		long n = sc.nextLong();
+		String str = String. valueOf(n);
+		long l=str.length();
+		long c=1;
+		long m=1;
+		long s=0;
+		while(n!=0)
+		{
+			long r=n%10;
+			if(9-r<r)
+			{
+				if(9-r==0&&c==l)
+				r=r;
+				else
+				r=9-r;
+			}
+			s=s+r*m;
+			n=n/10;
+			m=m*10;
+			c++;
+		}
+		System.out.println(s);
+    }
+}
