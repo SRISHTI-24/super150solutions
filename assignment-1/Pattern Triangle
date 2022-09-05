@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+int main() {
+	int n;
+	cin>>n;
+	int r=1;
+	int d=1;
+	int s=n-1;
+	int nb=1;
+	while(r<=n)
+	{
+		int i=1;
+		while(i<=s)
+		{
+			cout<<"  ";
+			i++;
+		}
+		int j=1;
+		int k=nb;
+		while(j<=d)
+		{
+			if(j<=(d/2))
+			{
+				cout<<k<<" ";
+				k++;
+			}
+			else
+			{
+				cout<<k<<" ";
+				k--;
+			}
+			j++;
+		}
+		nb++;
+		r++;
+		d=d+2;
+		s--;
+		cout<<"\n";
+	}
+	return 0;
+}
