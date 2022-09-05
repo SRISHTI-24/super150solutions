@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+int main() {
+	int min;
+	cin>>min;
+	int max;
+	cin>>max;
+	int s;
+	cin>>s;
+	for(int i=min;i<=max;i=i+s)
+	{
+		cout<<i;
+		int f = (i-32)*5/9;
+		cout<<" ";
+		cout<<f;
+		cout<<"\n";
+	}
+	return 0;
+}
