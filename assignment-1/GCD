@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+int main() {
+	int n1,n2;
+	cin>>n1>>n2;
+	int rk = min(n1,n2);
+	while(rk>0)
+	{
+		if((n1%rk == 0) && (n2%rk == 0))
+		break;
+		rk--;
+	}
+	cout<<rk;
+	return 0;
+}
