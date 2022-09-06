@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+int main() {
+	long long int t,sum1=0,sum2=0,r=1,k=2;
+	cin>>t;
+	while(t--)
+	{
+		int m,n;
+		cin>>m>>n;
+	    int r=0;
+		int k=0;
+		for(int i=1;;i++)
+		{
+			if(i%2!=0)
+			{
+				if((r+i)<=m)
+				{
+					r=r+i;
+				}
+				else
+				{
+					cout<<"Harshit";
+					break;
+				}
+			}
+			else 
+			{
+				if((k+i)<=n)
+				{
+					k=k+i;
+				}
+				else
+				{
+					cout<<"Aayush";
+					break;
+				}
+			}
+		}
+		cout<<"\n";
+	}
+	return 0;
+}
