@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int search(int a[], int n, int m)
+{
+	for(int i=0;i<n;i++)
+	{
+		if(a[i]==m)
+		return i;
+	}
+	return -1;
+}
+int main() {
+	int n;
+	cin>>n;
+	int a[n];
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	int m;
+	cin>>m;
+	cout<<search(a,n,m);
+	return 0;
+}
