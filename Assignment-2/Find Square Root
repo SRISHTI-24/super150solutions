@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+int squareRoot(int A) {
+        long long int s=0;
+        long long int l=A;
+        long long int rk=0;
+        while(s<=l)
+        {
+                long long int mid=(s+l)/2;
+                if(mid*mid<=A)
+                {
+                        rk=mid;
+                        s=mid+1;
+                }
+                else{
+                        l=mid-1;
+                }
+        }
+        return rk;
+}
+int main () {
+        long long int A;
+        cin >> A;
+        cout << squareRoot(A);
+	return 0;
+}
