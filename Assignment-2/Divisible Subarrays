@@ -1,0 +1,37 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		while(t-- > 0){
+			int N = sc.nextInt();
+			int[] arr = new int[N];
+			for(int i=0;i<N;i++){
+				arr[i] = sc.nextInt();
+			}
+			System.out.println(subarray(arr));
+		}
+    } 
+	public static long subarray(int[] arr){
+		long sum = 0;
+		int N = arr.length;
+		int[] freq = new int[N];
+		freq[0] = 1;
+		for(int i=0;i<freq.length;i++){
+			sum += arr[i];
+            int rem = (int)(sum % N);
+			if(rem < 0){
+				rem += N;
+			}
+			freq[rem] = freq[rem] + 1;
+		}
+		long res = 0;
+		for(int i=0;i<freq.length;i++){
+			if(freq[i] >= 2){
+				long p = freq[i];
+				res += (p*(p-1)) / 2;
+			}
+		}
+		return res;
+	}
+}
