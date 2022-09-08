@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		
+		Scanner sc = new Scanner(System.in);
+		int np = sc.nextInt();
+		int n = sc.nextInt();
+		int[] rank = new int[n];
+		for (int i = 0; i < rank.length; i++) 
+		{
+			rank[i] = sc.nextInt();
+		}
+		System.out.println(paratha(rank, np)) ;
+	}
+
+	public static int paratha(int[] rank, int np)
+	{
+		int lo = 0; 
+		int hi = Integer.MAX_VALUE;
+		int ans = 0;
+		while(lo<=hi)
+		{
+			int mid = (lo+hi)/2;
+			if(isPossible(rank,mid, np))
+			{
+				ans = mid;
+				hi = mid-1;
+			}
+			else
+			{
+				lo = mid+1;
+			}
+		}
+		return ans;
+	}
+
+	public static boolean isPossible(int[] rank, int mid, int np)
+	{
+		int p=0;
+		for(int i=0; i<rank.length; i++)
+		{
+			int time = 0;
+			int k =1;
+			while((time+k*rank[i])<=mid)
+			{
+				time = time + k*rank[i];
+				k++;
+				p++;
+			}
+			if(p>=np)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+}
