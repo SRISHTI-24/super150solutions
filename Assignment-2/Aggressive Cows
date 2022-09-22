@@ -41,7 +41,8 @@ int lmindist(vector<int> &a, int nc)
 	}
 	return rk;
 }
-int main() {
+int main()
+{
 	int ns,nc;
 	cin>>ns>>nc;
 	vector<int> a;
