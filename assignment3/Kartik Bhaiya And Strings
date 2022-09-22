@@ -1,0 +1,32 @@
+#include<iostream>
+#include<math.h>
+#include<bits/stdc++.h>
+using namespace std;
+int perfect(string str, char c, int k)
+{
+	int si=0,ei=0,rk=0,f=0;
+	while(ei<str.size())
+	{
+		if(str[ei]==c)
+		f++;
+		while(f>k)
+		{
+			if(str[si]==c)
+			f--;
+			si++;
+		}
+		rk=max(rk,ei-si+1);
+		ei++;
+	}
+	return rk;
+}
+int main() {
+	int k;
+	cin>>k;
+	string str;
+	cin>>str;
+	int f1 = perfect(str,'a',k);
+	int f2 = perfect(str,'b',k);
+	cout<<max(f1,f2);
+	return 0;
+}
