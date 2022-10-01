@@ -1,0 +1,24 @@
+import java.util.*;
+public class Main 
+{
+    public static void main(String args[]) 
+	{
+        Scanner sc = new Scanner(System.in);
+		String str1 = sc.next();
+		int c = 0;
+		for(int i=0; i<str1.length(); i++)
+		{
+			String res = "";
+			for(int j=i; j<str1.length(); j++)
+			{
+				res += str1.charAt(j);
+				StringBuilder s = new StringBuilder(res);
+				if(String.valueOf(s).equals(String.valueOf(s.reverse())))
+				{
+					c++;
+				}
+			}
+		}
+		System.out.println(c);
+    }
+}
