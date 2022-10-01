@@ -1,0 +1,26 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        String str;
+        Scanner s = new Scanner(System.in);
+        str=s.next();
+        StringBuilder stringbuilder = new StringBuilder();
+        int c=1;
+        for(int i=1;i<str.length();i++)
+        {
+            if(str.charAt(i-1)==str.charAt(i))
+            c++;
+            else
+            {
+               stringbuilder.append(str.charAt(i-1));
+               if(c>=2)
+               stringbuilder.append(c);
+               c=1;
+            }
+        }
+    stringbuilder.append(str.charAt(str.length()-1));
+    if(c>=2)
+    stringbuilder.append(c);
+    System.out.println(stringbuilder.toString());
+    }
+}
