@@ -1,0 +1,24 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+	string str;
+	cin>>str;
+	unordered_map<char,int> mp;
+	for(int i=0;i<str.size();i++)
+	{
+		mp[str[i]]++;
+	}
+	int max=0;
+	char c;
+	for(auto x:mp)
+	{
+		if(x.second>max)
+		{
+			max=x.second;
+			c=x.first;
+		}
+	}
+	cout<<c;
+	return 0;
+}
