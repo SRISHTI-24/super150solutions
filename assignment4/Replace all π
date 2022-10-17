@@ -1,0 +1,19 @@
+import java.util.*;
+public class Main {
+	public static String convert(String rk){
+		if(rk.length()==0 || rk.length()==1)
+		return rk;
+		String str=convert(rk.substring(1));
+		if(rk.charAt(0)=='p' && str.charAt(0)=='i')
+		return 3.14+str.substring(1);
+		return rk.charAt(0)+str;
+	}
+    public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		int t=sc.nextInt();
+		while(t-->0){
+		   String s=sc.next();
+		   System.out.println(convert(s));
+		}
+    }
+}
