@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+int locc(int a[], int i, int k)
+{
+	if(i<0)
+	return -1;
+	if(a[i]==k)
+	return i;
+	return locc(a,--i,k);
+}
+int main() {
+	int n;
+	cin>>n;
+	int a[n];
+	for(int i=0;i<n;i++)
+	cin>>a[i];
+	int k;
+	cin>>k;
+	int rk=locc(a,n-1,k);
+	if(rk>=0)
+	cout<<rk<<"\n";
+	else
+	cout<<-1<<"\n";
+	return 0;
+}
