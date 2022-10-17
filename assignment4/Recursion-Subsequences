@@ -1,0 +1,19 @@
+import java.util.*;
+public class Main {
+	public static void psubs(String rk,String as){
+		if(rk.length()==0){
+			System.out.print(as+" ");
+			return;
+		}
+		psubs(rk.substring(1),as);
+		psubs(rk.substring(1),as+rk.charAt(0));
+	}
+    public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		String rk=sc.next();
+		psubs(rk,"");
+		System.out.println();
+		int x = (int)(Math.pow(2,rk.length()));
+		System.out.print(x);
+    }
+}
