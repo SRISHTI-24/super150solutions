@@ -1,0 +1,17 @@
+import java.util.*;
+public class Main {
+	public static String replace(String str){
+		if(str.length()==0)
+		return str;
+		String ss=replace(str.substring(1));
+		if(str.charAt(0)=='0')
+		return "5"+ss;
+		return str.charAt(0)+ss;
+	}
+    public static void main (String args[]) {
+		Scanner sc=new Scanner(System.in);
+		int l=sc.nextInt();
+		String rk=l+"";
+		System.out.println(replace(rk));
+    }
+}
