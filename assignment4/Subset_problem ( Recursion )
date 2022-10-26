@@ -1,0 +1,29 @@
+import java.util.*;
+public class Main {
+  static int c =0;
+  public static void subsum(int[] arr, int sum, String ans, int idx, boolean[] vis){
+    if(sum<0) 
+		return;
+    if(sum == 0){
+      c++;
+    System.out.print(ans+" ");
+   	   return;
+    }
+    if(idx>arr.length-1) 
+		return;
+	    subsum(arr, sum-arr[idx], ans+arr[idx]+" ", idx+1, vis);
+    	subsum(arr, sum, ans, idx+1, vis);
+  }
+    public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] arr = new int[n];
+    for(int i=0; i<n; i++) 
+		arr[i] = sc.nextInt();
+    int t = sc.nextInt();
+    boolean[] vis = new boolean[n];
+    subsum(arr, t, "",0,vis);
+        System.out.println("\n"+c);
+    }
+  
+}
