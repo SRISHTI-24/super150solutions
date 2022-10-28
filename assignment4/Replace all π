@@ -1,6 +1,8 @@
 import java.util.*;
-public class Main {
-	public static String convert(String rk){
+public class Main 
+{
+	public static String convert(String rk)
+	{
 		if(rk.length()==0 || rk.length()==1)
 		return rk;
 		String str=convert(rk.substring(1));
