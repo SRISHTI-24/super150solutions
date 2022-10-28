@@ -1,0 +1,54 @@
+import java.util.*;
+public class Main {
+static int c=0;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		boolean[][] brd = new boolean[n][n];
+		nknight(brd, 0, 0, "", n);
+		System.out.println("\n"+c);
+
+	}
+
+	public static void nknight(boolean[][] brd, int row, int col, String rk, int t) {
+		if (t == 0) {
+			System.out.print(rk + " ");
+			c++;
+			return;
+		}
+
+		if (col == brd.length) {
+			row++;
+			col = 0;
+		}
+		if (row == brd.length) {
+			return;
+		}
+		if (safe(brd, row, col)) {
+			brd[row][col] = true;
+
+			nknight(brd, row, col + 1, rk + "{" + row + "-" + col + "} ", t - 1);
+			brd[row][col] = false;
+		}
+		nknight(brd, row, col + 1, rk, t);
+
+	}
+
+	public static boolean safe(boolean[][] brd, int row, int col) 
+	{
+		int rows[] = { -1, -1, -2, -2 };
+		int cols[] = { 2, -2, 1, -1 };
+		for (int i = 0; i < cols.length; i++) {
+			int x = row + rows[i];
+			int y = col + cols[i];
+			if (x >= 0 && y >= 0 && y < brd.length && brd[x][y] == true) {
+				return false;
+			}
+
+		}
+
+		return true;
+	}
+
+}
