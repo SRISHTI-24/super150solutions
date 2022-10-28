@@ -1,0 +1,23 @@
+import java.util.*;
+public class Main {
+  static int count =0 ;
+  public static void mPath(int a, int b, int m , int n, String ans){
+    if(m==a-1 && n==b-1){
+      count++;
+      System.out.print(ans+" ");
+      return;
+    }
+    if(m>=a || n>=b) 
+		return;
+    	mPath(a,b, m+1, n, ans+'V');
+    	mPath(a,b, m, n+1, ans+'H');
+    	mPath(a,b, m+1, n+1, ans+'D');
+  }
+    public static void main(String args[]) {
+        Scanner sc  = new Scanner(System.in);
+    int m = sc.nextInt();
+    int n = sc.nextInt();
+    mPath(m,n,0,0,"");
+    System.out.println("\n"+count);
+    }
+}
