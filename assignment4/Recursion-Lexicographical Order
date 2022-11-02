@@ -1,0 +1,28 @@
+import java.util.*;
+public class Main {
+
+	public static void c(int co, int end) {
+		if (co > end)
+		 {
+			return;
+		}
+		System.out.print(co+" ");
+		int i = 0;
+		if (co == 0)
+		 {
+			i = 1;
+		}
+		for (; i <= 9; i++)
+		 {
+			c(co* 10 + i, end);
+		}
+
+	}
+    public static void main(String args[])
+	 {
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt();
+        c(0, n);
+
+    }
+}
