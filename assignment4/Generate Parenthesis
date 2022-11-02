@@ -1,0 +1,23 @@
+import java.util.*;
+public class Main {
+  static ArrayList<String> a = new ArrayList<>();
+  public static void gp(int n, int r, int k, String ans){
+    if(r == n && k == n){
+      a.add(ans);
+      return;
+    }
+    if(r<=n) 
+		gp(n, r+1, k, ans+'(');
+    if(k <= n && r > k) 
+		gp(n, r, k+1, ans+')');
+   } 
+    public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    gp(n, 0, 0, "");
+    Collections.sort(a);
+    for(int i=a.size()-1; i>=0; i--){
+      System.out.println(a.get(i));
+    }
+    }
+}
