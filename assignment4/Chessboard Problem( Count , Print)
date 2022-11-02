@@ -1,0 +1,96 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) 
+	{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int ans = chessboard(0,0,n,n);
+       
+        chessboard(0,0,n,n,"");
+		System.out.println();
+		 System.out.println(ans);
+    }
+    public static void chessboard(int cr, int cc, int er, int ec, String ans) 
+	{
+		if (cr == er - 1 && cc == ec - 1) {
+       System.out.print(ans + "{" + cr + "-" + cc + "} ");
+           return;
+}
+
+		if (cr >= er || cc >= ec)
+		 {
+           return;
+
+		}
+
+		chessboard(cr + 2, cc + 1, er, ec, ans + "{" + cr + "-" + cc + "}K");
+      chessboard(cr + 1, cc + 2, er, ec, ans + "{" + cr + "-" + cc + "}K");
+       if (cr == 0 || cc == 0 || cr == er - 1 || cc == ec - 1)
+	    {
+
+			for (int moves = 1; moves < ec; moves++)
+
+				chessboard(cr, cc + moves, er, ec, ans + "{" + cr + "-" + cc + "}R");
+
+			for (int moves = 1; moves < er; moves++)
+
+				chessboard(cr + moves, cc, er, ec, ans + "{" + cr + "-" + cc + "}R");
+
+		}
+
+		if (cr == cc || cr + cc == er - 1)
+		 {
+
+			for (int moves = 1; moves < er; moves++) {
+
+				chessboard(cr + moves, cc + moves, er, ec, ans + "{" + cr + "-" + cc + "}B");
+
+			}
+		}
+	}
+
+	public static int chessboard(int cr, int cc, int er, int ec) 
+	{
+
+		if (cr == er - 1 && cc == ec - 1)
+		 {
+
+			return 1;
+
+		}
+
+		if (cr >= er || cc >= ec)
+		 {
+       	return 0;
+
+		}
+
+		int cnt = 0;
+
+		cnt += chessboard(cr + 2, cc + 1, er, ec);
+
+		cnt += chessboard(cr + 1, cc + 2, er, ec);
+
+		if (cr == 0 || cc == 0 || cr == er - 1 || cc == ec - 1) 
+		{
+
+			for (int moves = 1; moves < ec; moves++)
+
+				cnt += chessboard(cr, cc + moves, er, ec);
+
+			for (int moves = 1; moves < er; moves++)
+
+				cnt += chessboard(cr + moves, cc, er, ec);
+
+		}
+    if (cr == cc || (cr + cc == er - 1)) 
+	{
+         for (int moves = 1; moves < er; moves++) 
+		 {
+            cnt += chessboard(cr + moves, cc + moves, er, ec);
+
+		}
+		}
+     return cnt;
+	}
+}
