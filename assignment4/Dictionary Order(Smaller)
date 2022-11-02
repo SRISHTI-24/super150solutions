@@ -1,0 +1,32 @@
+
+import java.util.*;
+public class Main {
+  static ArrayList<String> a = new ArrayList<>();
+  public static void p(String s, String ans){
+    if(s.length() == 0)
+	{
+      a.add(ans);
+      return;
+    }
+    for(int i=0; i<s.length(); i++)
+	{
+      char ch = s.charAt(i);
+      p(s.substring(0,i)+s.substring(i+1), ans+ch);
+    }
+  }
+    public static void main(String args[]) 
+	{
+        Scanner sc = new Scanner(System.in);
+    	String s = sc.next();
+    	p(s,"");
+    	Collections.sort(a);
+    	for(int i=0; i<a.size(); i++)
+		{
+      		if(a.get(i).equals(s))
+			{
+        	break;
+      		}
+      	System.out.println(a.get(i));
+    	}
+    }
+}
