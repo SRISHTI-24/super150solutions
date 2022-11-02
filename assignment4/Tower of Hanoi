@@ -1,0 +1,15 @@
+import java.util.*;
+public class Main {
+	public static void T(int n, String src, String hlp, String des){
+    if(n == 0) 
+		return;
+    T(n-1, src, des, hlp);
+    	System.out.println("Moving ring "+n+" from "+src+" to "+des);
+    T(n-1, hlp, src, des);
+  }
+    public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    T(n,"A","C","B");
+    }
+}
