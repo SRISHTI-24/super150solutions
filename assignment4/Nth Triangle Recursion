@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+int nthtriangle(int n,int s)
+{
+	if(n<1)
+	return s;
+	s=s+n;
+	return nthtriangle(n-1,s);
+    
+}
+int main() {
+	int n;
+	cin>>n;
+	cout<<nthtriangle(n,0);
+	return 0;
+}
