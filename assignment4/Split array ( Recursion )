@@ -1,0 +1,24 @@
+import java.util.*;
+public class Main {
+	public static int printandcount(int[] a,int l,int u,String a1,String a2,int s1,int s2){
+		if(l>u){
+			if(s1==s2){
+				System.out.println(a1+" and "+a2);
+				return 1;
+			}
+			return 0;
+		}
+		int c=printandcount(a,l+1,u,a1+a[l]+" ",a2,s1+a[l],s2);
+		int c1=printandcount(a,l+1,u,a1,a2+a[l]+" ",s1,s2+a[l]);
+		return c+c1;
+	}
+    public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int[] a=new int[n];
+		for(int i=0;i<n;i++){
+			a[i]=sc.nextInt();
+		}
+		System.out.println(printandcount(a,0,a.length-1,"","",0,0));
+    }
+}
