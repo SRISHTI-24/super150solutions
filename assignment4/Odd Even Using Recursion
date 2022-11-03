@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+void odd(int m)
+{
+	if(m<=0)
+	return ;
+	if(m%2!=0)
+	cout<<m<<"\n";
+	odd(m-1);
+}
+void even(int n)
+{
+	if(n<=0)
+	return;
+	even(n-1);
+	if(n%2==0)
+	cout<<n<<"\n";
+}
+int main() {
+	int n;
+	cin>>n;
+	odd(n);
+	even(n);
+	return 0;
+}
