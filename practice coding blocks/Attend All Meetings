@@ -1,0 +1,31 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector< pair<int, int>> v;
+    int i;
+    while(n--)
+    {
+        int s,e;
+        cin>>s>>e;
+        v.push_back(make_pair(s,e));
+        sort(v.begin(),v.end());
+        for(i=1;i<v.size();i++)
+        {
+            if(v[i].first<=v[i-1].second)
+            {
+                cout<<"false"<<"\n";
+                break;
+            }
+        }
+        if(i<v.size())
+        {
+            break;
+        }
+    }
+    if(n<0)
+        cout<<"true"<<"\n";
+}
