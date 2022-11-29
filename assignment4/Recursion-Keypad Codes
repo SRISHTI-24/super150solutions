@@ -1,0 +1,36 @@
+import java.util.*;
+public class Main {
+  static int rk=0;
+  public static void kpd(String ss, int in, HashMap<Character,String> mp, String ans)
+  {
+    if(in == ss.length())
+	{
+      rk++;
+      System.out.print(ans+" ");
+      return;
+    }
+    String str = mp.get(ss.charAt(in));
+    for(int i=0; i<str.length(); i++)
+	{
+      ans += str.charAt(i);
+      kpd(ss, in+1, mp, ans);
+      ans = ans.substring(0,ans.length()-1);
+    }
+  }
+    public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
+    String s = sc.next();
+    HashMap<Character,String> mp = new HashMap<>();
+  	  mp.put('1',"abc");
+      mp.put('2',"def");
+      mp.put('3',"ghi");
+      mp.put('4',"jkl");
+      mp.put('5',"mno");
+      mp.put('6',"pqrs");
+      mp.put('7',"tuv");
+      mp.put('8',"wx");
+      mp.put('9',"yz");
+      kpd(s,0,mp,"");
+    System.out.println("\n"+rk);
+    }
+}
