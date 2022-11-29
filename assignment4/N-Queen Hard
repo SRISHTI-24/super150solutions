@@ -1,0 +1,74 @@
+import java.util.*;
+class Main{
+  public static void main(String[] args) 
+  {
+	Scanner sc=new Scanner(System.in);
+	int n=sc.nextInt();
+    boolean[][] brd = new boolean[n][n];
+    List<List<String>> rk = new ArrayList<>();
+    queen(brd,0,rk);
+    System.out.println(rk.size());
+}
+
+ static void  queen(boolean[][] brd,int row,List<List<String>> rk){
+    
+    if(row==brd.length){
+        List<String> lst = insert(brd);
+        rk.add(lst);
+        return;
+    }
+    
+    // Placing Queens and Checking for every row and column
+    for(int col=0;col<brd.length;col++){
+        //place queen if Safe
+        if(Safe(brd,row,col)){
+            brd[row][col] = true;
+            queen(brd,row+1,rk); //Recursive call
+            brd[row][col] = false;    // Backtrack
+        }
+    }
+}
+
+ static boolean Safe(boolean[][] brd, int row ,int col){
+    
+    // Vertical row
+    for(int i=0;i<row;i++){
+        if(brd[i][col])
+            return false;
+    }
+    
+    // Left diagonal
+    int ml = Math.min(row,col);
+    for(int i=1;i<=ml;i++){
+        if(brd[row-i][col-i]){
+            return false;
+        }
+    }
+    
+    // Right diagonal
+    int mr = Math.min(row,brd.length-col-1);
+    for(int i=1;i<=mr;i++){
+        if(brd[row-i][col+i]){
+            return false;
+        }
+    }
+    return true;
+}
+ 
+  static List<String> insert(boolean[][] brd){
+      
+    List<String> rk = new ArrayList<>();
+    for(boolean[] row: brd){
+        String S = "";
+        for(boolean e:row){
+            if(e){
+                S += "Q";
+            }
+            else
+                S += ".";
+        }
+        rk.add(S);
+    }
+      return rk;
+}
+}
