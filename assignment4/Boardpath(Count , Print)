@@ -1,0 +1,27 @@
+import java.util.*;
+public class Main {
+	public static void dc(int n, int start, int end, String ans)
+	{
+    if(start == end) 
+	{
+      	rk++;
+      	System.out.print(ans+" ");
+      	return;
+    }
+    if(start>end) 
+		return;
+    for(int i=1; i<=n; i++)
+	{
+      	dc(n, start+i, end, ans+i);
+    }
+    
+  }
+  static int rk = 0;
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+    int m = sc.nextInt();
+    int n = sc.nextInt();
+    dc(n, 0, m, "");
+    System.out.println("\n"+rk);
+    }
+}
