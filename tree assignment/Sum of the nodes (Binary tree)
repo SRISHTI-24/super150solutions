@@ -1,0 +1,68 @@
+import java.util.*;
+public class Main {
+
+ static Scanner s = new Scanner(System.in);
+ 
+ public static void main(String[] args) {
+  Main mm = new Main();
+  BinaryTree bb = mm.new BinaryTree();
+  System.out.println(bb.sumOfNodes());
+ }
+
+ private class BinaryTree {
+  private class Node {
+   int data;
+   Node left;
+   Node right;
+  }
+
+  private Node root;
+  private int size;
+
+  public BinaryTree() {
+   this.root = this.takeInput(null, false);
+  }
+
+  public Node takeInput(Node parent, boolean ilc) {
+   
+   int cd = s.nextInt();
+   Node child = new Node();
+   child.data = cd;
+   this.size++;
+
+   // left
+   boolean lh = s.nextBoolean();
+
+   if (lh) {
+    child.left = this.takeInput(child, true);
+   }
+
+   // right
+   boolean rh = s.nextBoolean();
+
+   if (rh) {
+    child.right = this.takeInput(child, false);
+   }
+
+   // return
+   return child;
+  }
+  public int sumOfNodes() {
+   return this.sumOfNodes(this.root) ;
+  }
+  
+  private int sumOfNodes(Node node) {
+   
+   if(node == null)
+   {
+    return 0;
+   }
+
+   int l = sumOfNodes(node.left);
+   int r = sumOfNodes(node.right);
+
+   return l + r + node.data;
+   
+  }
+ }
+}
