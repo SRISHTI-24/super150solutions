@@ -1,0 +1,67 @@
+import java.util.*;
+public class Main {
+  static Stack<Integer> stack1 = new Stack<>();
+  static Stack<Integer> stack2 = new Stack<>();
+
+    public static void main (String args[]) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int j=0;
+    String[] Operations = new String[n];
+    for(int i=0;i<n;i++){
+      Operations[i] = sc.next();
+      if(Operations[i].equals("push")){
+        j++;
+      }
+    }
+    int[]  array= new int[j];
+    for(int i=0;i<j;i++){
+      array[i] = sc.nextInt();
+    }
+    
+    int k=0;
+    for(int i=0;i<n;i++){
+      if(Operations[i].equals("push")){
+        pushnum(array[k]);
+        k++;
+      }
+      else if(Operations[i].equals("pop")){
+        popnum();
+      }
+      else if(Operations[i].equals("top")){
+        System.out.print(getTop()+" ");
+      }
+      else if(Operations[i].equals("getMin")){
+        System.out.print(getMin()+" ");
+      }
+    }
+  }
+
+  public static void pushnum(int num){
+    stack1.push(num);
+  }
+
+  public static void popnum(){
+    if(stack1.isEmpty())
+      return;
+    stack1.pop();
+  }
+
+  public static int getTop(){
+    if(stack1.isEmpty())
+      return -1;
+    return stack1.peek();
+  }
+  
+  public static int getMin(){
+    int min = Integer.MAX_VALUE;
+    while(!stack1.isEmpty()){
+      min = Math.min(min,stack1.peek());
+      stack2.push(stack1.pop());
+    }
+    while(!stack2.isEmpty()){
+      stack1.push(stack2.pop());
+    }
+    return min;
+  }
+}
