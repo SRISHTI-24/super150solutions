@@ -1,0 +1,61 @@
+import java.util.*;
+class BinarySearchTree {
+    class Node {
+        int data;
+        Node left, right;
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
+        
+    }
+    Node root;
+    
+    public Node buildTree(int inorder[], int start, int end) {
+        if (start > end) {
+            return null;
+        }
+
+        int mid = (start + end) / 2;
+        Node node = new Node(inorder[mid]);
+
+        node.left = buildTree(inorder, start, mid - 1);
+        node.right = buildTree(inorder, mid + 1, end);
+
+        return node;
+    }
+
+    public void preorder(Node root){
+        if(root == null)
+        return;
+
+        System.out.print(root.data + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+}
+
+
+
+
+ class Main{
+    
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int[] a = new int[n];
+        int sm = 0;
+        for(int x = 0; x < n; x++){
+            a[x] = s.nextInt();
+        }
+
+        for(int x = n-1; x >= 0; x--){
+            sm += a[x];
+            a[x] = sm;
+        }
+
+        BinarySearchTree tp = new BinarySearchTree();
+        
+        tp.preorder(tp.buildTree(a, 0, n-1));
+    }
+}
