@@ -1,0 +1,32 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+		Scanner s = new Scanner(System.in);
+		int x = s.nextInt();
+		int y = s.nextInt();
+		int z = s.nextInt();
+		int[] arry1 = new int[x];
+		int[] arry2 = new int[y];
+		int[] arry3 = new int[z];
+		for(int i=0; i<x; i++){
+			arry1[i] = s.nextInt();
+		}
+		for(int i=0; i<y; i++){
+			arry2[i] = s.nextInt();
+		}
+		for(int i=0; i<z; i++){
+			arry3[i] = s.nextInt();
+		}
+		int t = s.nextInt();
+		for(int i=0; i < x; i++){
+			for(int j=0; j<y; j++){
+				for(int k=0; k<z; k++){
+					if(arry1[i]+arry2[j]+arry3[k] == t){
+						System.out.println(arry1[i] + " " + arry2[j] + " " + arry3[k]);
+						return;
+					}
+				}
+			}
+		}
+    }
+}
