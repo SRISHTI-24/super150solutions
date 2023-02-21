@@ -1,0 +1,52 @@
+import java.util.*;
+ public class Main {
+
+	public static void main(String[] args) {
+		 
+		Scanner s = new Scanner(System.in);
+		int l = s.nextInt();
+		int[] cl = new int[l];
+		int[] il = new int[l];
+		for (int i = 0; i < cl.length; i++) {
+			cl[i] = s.nextInt();
+		}
+		for (int i = 0; i < il.length; i++) {
+			il[i] = s.nextInt();
+		}
+		System.out.println(importanceOfTime(cl, il));
+
+	}
+
+	private static int importanceOfTime(int[] cl, int[] il)
+	{
+		int t = 0;
+		Queue<Integer> x = new LinkedList<>();
+		Queue<Integer> y = new LinkedList<>();
+		for (int i = 0; i < cl.length; i++) 
+		{
+			x.add(cl[i]);
+		}
+		for (int i = 0; i < il.length; i++) 
+		{
+			y.add(il[i]);
+		}
+		while (!x.isEmpty()) 
+		{
+			if (x.peek() == y.peek()) 
+			{
+				t++;
+				x.poll();
+				y.poll();
+			} 
+			else 
+			{
+				int i2 = x.poll();
+				x.add(i2);
+				t++;
+			}
+
+		}
+		return t;
+	}
+
+}
