@@ -1,0 +1,42 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+		Scanner s = new Scanner(System.in);
+		int t = s.nextInt();
+		while(t-- !=0)
+		{
+		int arr = s.nextInt();
+		int[] arry1 = new int[arr];
+		for(int i=0; i<arr; i++) 
+		arry1[i] = s.nextInt();
+		int bb = s.nextInt();
+		int[] arry2 = new int[bb];
+		for(int i=0; i<bb; i++) 
+		arry2[i] = s.nextInt();
+		int i=0, j=0;
+		ArrayList<Integer> pp = new ArrayList<>();
+		while(i<arr && j<bb){
+			if(arry1[i] > arry2[j]){
+				pp.add(arry2[j]);
+				j++;
+			}
+			else{
+				pp.add(arry1[i]);
+				i++;
+			}
+		} 
+		while(i<arr){
+			pp.add(arry1[i]);
+			i++;
+		}
+		while(j<bb){
+			pp.add(arry2[j]);
+			j++;
+		}
+		for(int k : pp){
+			System.out.print(k+" ");
+		}
+		System.out.println();
+		}
+    }
+}
