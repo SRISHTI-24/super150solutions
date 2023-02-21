@@ -1,0 +1,96 @@
+import java.util.*;
+public class Main {
+
+	static Scanner scn = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Main m = new Main();
+		int[] preorder = takeInput();
+		int[] inorder = takeInput();
+		BinaryTree bt = m.new BinaryTree(preorder, inorder);
+		bt.display();
+	}
+
+	public static int[] takeInput() {
+		int n = scn.nextInt();
+
+		int[] rv = new int[n];
+		for (int i = 0; i < rv.length; i++) {
+			rv[i] = scn.nextInt();
+		}
+
+		return rv;
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+
+		private Node root;
+		private int size;
+
+		public BinaryTree(int[] preorder, int[] inorder) {
+			this.root = this.construct(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+		}
+
+		private Node construct(int[] preorder, int plo, int phi, int[] inorder, int ilo, int ihi) {
+			if(plo>phi || ilo>ihi)
+			   return null;
+		   Node Newnode=new Node();
+		   Newnode.data=preorder[plo];
+		   int inIndex = search(inorder, ilo, ihi, Newnode.data);
+		   int net=inIndex-ilo;
+		   Newnode.left=construct(preorder,plo+1,plo+net,inorder,ilo,inIndex-1);
+		   Newnode.right=construct(preorder,plo+net+1,phi,inorder,inIndex+1,ihi);
+		   return Newnode;
+			// write your code here
+			// write your code here
+		}
+		int search(int arr[], int strt, int end, int value)
+    {
+        int i;
+        for (i = strt; i <= end; i++) {
+            if (arr[i] == value)
+                return i;
+        }
+        return i;
+    }
+
+
+		public void display() {
+			this.display(this.root);
+		}
+
+		private void display(Node node) {
+			if (node == null) {
+				return;
+			}
+
+			String str = "";
+
+			if (node.left != null) {
+				str += node.left.data;
+			} else {
+				str += "END";
+			}
+
+			str += " => " + node.data + " <= ";
+
+			if (node.right != null) {
+				str += node.right.data;
+			} else {
+				str += "END";
+			}
+
+			System.out.println(str);
+
+			this.display(node.left);
+			this.display(node.right);
+		}
+
+	}
+
+}
