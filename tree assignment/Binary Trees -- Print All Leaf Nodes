@@ -1,0 +1,65 @@
+import java.util.*;
+public class Main {
+    public class Node {
+        int data;
+        Node left;
+        Node right;
+    }
+
+    private Node root;
+    Scanner s = new Scanner(System.in);
+
+    public Main() {
+        this.root = Create_Tree();
+    }
+
+    private Node Create_Tree() {
+        Queue<Node> qu = new LinkedList<>();
+        Node n = new Node();
+        n.data = s.nextInt();
+        root = n;
+        qu.add(n);
+        while (!qu.isEmpty()) {
+            Node a = qu.remove();
+            int x1 = s.nextInt();
+            int x2 = s.nextInt();
+            if (x1 != -1) {
+                Node node = new Node();
+                node.data = x1;
+                a.left = node;
+                qu.add(node);
+            }
+            if (x2 != -1) {
+                Node node = new Node();
+                node.data = x2;
+                a.right = node;
+                qu.add(node);
+            }
+        }
+        return root;
+    }
+
+    
+    private static void printleaf(Node root)
+    {
+        if(root.left==null && root.right==null)
+        {
+            System.out.print(root.data+" ");
+        }
+                
+        if(root.left!=null)
+		{
+			printleaf(root.left);
+		}
+		if(root.right!=null)
+		{
+			printleaf(root.right);
+		}
+        
+    }
+
+    public static void main(String[] args) {
+        Main mm = new Main();
+        printleaf(mm.root);
+    }
+}
