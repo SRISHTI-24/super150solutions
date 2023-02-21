@@ -1,0 +1,93 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+class Main {
+	static class BinaryTreeFromLvlOrder {
+
+         class BstPair{
+        boolean isbst=true;
+        long min=Long.MAX_VALUE;
+        long max=Long.MIN_VALUE;
+
+        }
+
+      public BstPair ValidBST(Node root){
+        if(root==null){
+            return new BstPair();
+        }
+        BstPair lbp=ValidBST(root.left);
+        BstPair rbp=ValidBST(root.right);
+        BstPair sbp=new BstPair();
+        sbp.max=Math.max(lbp.max,Math.max(rbp.max,root.val));
+        sbp.min=Math.min(lbp.min,Math.min(rbp.min,root.val));
+        if(lbp.isbst&&rbp.isbst&&lbp.max<root.val&&rbp.min>root.val){
+            sbp.isbst=true;
+        }
+        else{
+            sbp.isbst=false;
+        }
+        return sbp;
+      }
+
+		private Scanner s = new Scanner(System.in);
+
+		private class Node {
+			int val;
+			Node left;
+			Node right;
+
+			public Node(int val) {
+				this.val = val;
+			}
+		}
+
+		private Node root;
+
+		public BinaryTreeFromLvlOrder() {
+			// TODO Auto-generated constructor stub
+			root = construct();// 2k
+		}
+
+		private Node construct() {
+			// TODO Auto-generated method stub
+
+			int val = s.nextInt();
+			Node nd = new Node(val);
+			Queue<Node> lrkl = new LinkedList<>();
+			lrkl.add(nd);
+
+			while (!lrkl.isEmpty()) {
+				Node front = lrkl.remove();
+				int x = s.nextInt();
+				int y = s.nextInt();
+
+				if (x != -1) {
+					Node nx = new Node(x);
+					front.left = nx;
+					lrkl.add(nx);
+				}
+
+				if (y != -1) {
+					Node ny = new Node(y);
+					front.right = ny;
+					lrkl.add(ny);
+				}
+			}
+			return nd;// 2k
+		}
+
+
+		private boolean isValid() {
+			// TODO Auto-generated method stub
+            return ValidBST(root).isbst;
+			//return false;
+		}
+
+	}
+
+	public static void main(String[] args) {
+		BinaryTreeFromLvlOrder bb = new BinaryTreeFromLvlOrder();
+		System.out.println(bb.isValid());
+	}
+}
