@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int g[10][10], v[10][10], l, as = -1, s = 0, L = 10;
+int x[8] = {1, 1, 2, 2, -1, -1, -2, -2};
+int y[8] = {2, -2, 1, -1, -2, 2, -1, 1};
+
+void input_grid() {
+    int i, j;
+    for (i = 0; i < l; i++) {
+        for (j = 0; j < l; j++) {
+            cin >> g[i][j];
+            if (g[i][j]) 
+				s++;
+            v[i][j] = 0;
+        }
+    }
+}
+
+void rk(int x1, int y1, int c) {
+    as = max(as, c);
+    for (int i = 0; i < 8; i++) {
+        int x2 = x1 + x[i];
+        int y2 = y1 + y[i];
+        if (x2 >= 0 && x2 < L && y2 >= 0 && y2 < L && g[x2][y2]) {
+            g[x2][y2] = 0;
+            rk(x2, y2, c + 1);
+            g[x2][y2] = 1;
+        }
+    }
+}
+
+int main()
+{
+    cin >> l;
+	input_grid();
+    int i, j;
+    g[0][0] = 0;
+    rk(0, 0, 1);
+    cout << s - as;
+}
