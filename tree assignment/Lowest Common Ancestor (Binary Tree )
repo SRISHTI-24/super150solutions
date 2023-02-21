@@ -1,0 +1,75 @@
+import java.util.*;
+public class Main {
+    static Scanner s = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		Main mm = new Main();
+		BinaryTree bt = mm.new BinaryTree();
+		
+		System.out.println(bt.lca().data);
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+        
+		private Node root;
+		private int size;
+        int x,y;
+		public BinaryTree() {
+			this.root = this.takeInput(null, false);
+			x=s.nextInt();
+		    y=s.nextInt();
+		}
+
+		private Node takeInput(Node parent, boolean ilc) {
+			
+			int cd = s.nextInt();
+			Node child = new Node();
+			child.data = cd;
+			this.size++;
+
+			// left
+			boolean cl = s.nextBoolean();
+
+			if (cl) {
+				child.left = this.takeInput(child, true);
+			}
+
+			// right
+			boolean cr = s.nextBoolean();
+
+			if (cr) {
+				child.right = this.takeInput(child, false);
+			}
+
+			// return
+			return child;
+		}
+		public Node lca() {
+			return this.lca(this.root,x,y) ;
+		}
+		private Node lca(Node root,int x,int y) {
+          if(root==null){
+			  return root;
+		  }
+		  if(root.data==x || root.data==y){
+			  return root;
+		  }
+		  Node leftans=lca(root.left,x,y);
+		  Node rightans=lca(root.right,x,y);
+		  if(leftans!=null && rightans!=null){
+			  return root;
+		  }
+		  else if(leftans!=null){
+			  return leftans;
+		  }
+		  else{
+			  return rightans;
+		  }
+		}
+	}
+}
