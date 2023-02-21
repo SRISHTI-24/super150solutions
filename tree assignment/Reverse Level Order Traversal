@@ -1,0 +1,99 @@
+import java.util.*;
+public class Main {
+
+	static Scanner s = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Main mm = new Main();
+		BinaryTree bt1 = mm.new BinaryTree();
+		ArrayList<Integer> lt=new ArrayList<>();
+          lt=bt1.levelArrayList();
+          for(int i=0;i<lt.size();i++){
+               System.out.print(lt.get(i)+" ");
+          }
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+
+		private Node root;
+		private int size;
+
+		public BinaryTree() {
+			this.root = this.takeInput(null, false);
+		}
+
+		public Node takeInput(Node parent, boolean bl) {
+
+			int cd = s.nextInt();
+			Node child = new Node();
+			child.data = cd;
+			this.size++;
+
+			// left
+			boolean cl = s.nextBoolean();
+
+			if (cl ) {
+				child.left = this.takeInput(child, true);
+			}
+
+			// right
+			boolean cr = s.nextBoolean();
+
+			if (cr) {
+				child.right = this.takeInput(child, false);
+			}
+
+			// return
+			return child;
+		}
+
+		public ArrayList<Integer>levelArrayList() {
+
+			// write your code here
+		ArrayList<Integer> rk =new ArrayList<>();
+        Queue<Node> qu =new LinkedList<>();
+
+          if(root==null){
+            return rk;
+          }
+
+        //add something
+        qu.add(root);
+
+        //rstarting bfs
+        while(!qu.isEmpty()){
+
+            //find the size pf queue will tell us no.of node at particular level
+            int cs=qu.size();
+
+            //process these operation(remove,do something,process children)currentsize times
+
+               while(cs>0){
+                    Node cn=qu.poll();
+                    rk.add(cn.data);
+
+                //process children
+
+
+                if(cn.right!=null){
+                    qu.add(cn.right);
+                }
+                if(cn.left!=null){
+                    qu.add(cn.left);
+                }
+                cs-=1;
+            }
+
+        }
+        Collections.reverse(rk);
+        return rk;
+		}
+
+	}
+
+}
