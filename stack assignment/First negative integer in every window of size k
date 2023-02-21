@@ -1,0 +1,51 @@
+import java.util.*;
+ 
+class Main
+{
+ 
+
+static void printFirstNegativeInteger(int a[], int l, int k)
+{
+
+    boolean f;
+  
+    for (int i = 0; i<(l-k+1); i++)        
+    {
+        f = false;
+ 
+        
+        for (int j = 0; j<k; j++)
+        {
+            
+            if (a[i+j] < 0)
+            {
+                System.out.print((a[i+j])+" ");
+                f = true;
+                break;
+            }
+        }
+         
+       
+        if (!f)
+            System.out.print("0"+" ");
+    }
+}
+ 
+
+public static void main(String args[])
+{    
+Scanner s=new Scanner(System.in);
+int t=s.nextInt();
+while(t>0)
+{
+     int n=s.nextInt();
+	 int k=s.nextInt();
+	 int a[]=new int[n];
+	 for(int i=0;i<n;i++)
+	 	a[i]=s.nextInt();
+     printFirstNegativeInteger(a, n, k);
+	System.out.println();
+	 t--;
+}
+}
+}
