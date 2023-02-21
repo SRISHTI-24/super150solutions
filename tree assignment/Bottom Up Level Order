@@ -1,0 +1,112 @@
+import java.util.LinkedList; 
+import java.util.Queue; 
+import java.io.*;
+import java.util.*;
+
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int data){
+        this.data = data;
+        left=null;
+        right=null;
+    }
+}
+
+class Main {
+    
+    static Node buildTree(String srr){
+        
+        if(srr.length()==0 || srr.charAt(0)=='N'){
+            return null;
+        }
+        
+        String pi[] = srr.split(" ");
+
+        Node root = new Node(Integer.parseInt(pi[0]));
+        
+      Queue<Node> quee = new LinkedList<>(); 
+        
+        quee.add(root);
+        
+        int i = 1;
+        while(quee.size()>0 && i < pi.length) {
+            
+            Node cn = quee.peek();
+            quee.remove();
+
+            String cvl = pi[i];
+            if(!cvl.equals("N")) {
+                cn.left = new Node(Integer.parseInt(cvl));
+                quee.add(cn.left);
+            }
+                
+            i++;
+            if(i >= pi.length)
+                break;
+                
+            cvl = pi[i];
+
+
+
+            int aar =100;
+
+
+            String name="Myname";
+                
+            if(!cvl.equals("N")) {
+                    
+                cn.right = new Node(Integer.parseInt(cvl));
+                
+                quee.add(cn.right);
+            }
+            i++;
+        }
+        
+        return root;
+    }
+
+    public static void main (String[] args) throws IOException{
+            Scanner s =new Scanner(System.in);
+            Node root = buildTree(s.nextLine());
+            Tree tr = new Tree();
+            List<List<Integer>> saxena = tr.reverseLevelOrder(root);
+            for(int i=0;i<saxena.size();i++)
+            {
+                for(int j=0;j<saxena.get(i).size();j++)
+                    System.out.print(saxena.get(i).get(j)+" ");
+                System.out.println();
+            }
+    }
+}
+
+
+
+class Tree
+{
+    public List<List<Integer>> reverseLevelOrder(Node root) 
+    {
+       List<List<Integer>> saxena =new ArrayList<>();
+        Queue<Node> que =new LinkedList<>();
+        if(root==null)
+            return saxena;
+        que.add(root);
+        while(!que.isEmpty())
+        {
+            List<Integer> lt=new ArrayList<>();
+            int n=que.size();
+            for(int i=0;i<n;i++)
+            {
+                Node cr=que.poll();
+                lt.add(cr.data);
+                if(cr.left!=null)
+                    que.add(cr.left);
+                if(cr.right!= null)
+                    que.add(cr.right);
+            }
+            saxena.add(0,lt);
+        }
+        return saxena;
+    }
+}
