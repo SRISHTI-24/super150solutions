@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void mapped(string ip, string rk)
+{
+    if(ip.size()==0)
+    {
+      cout<<rk<<endl;
+      return;
+    }
+    
+    int f=ip[0]-'0';
+    char c=f + 'A' -1;
+    string rk1 =rk+ c;
+    mapped(ip.substr(1),rk1);
+
+      if(ip[1]!='\0')
+      {
+        int s =ip[1]-'0';
+         s=f*10+s;
+         if(s<=26)
+         {
+            char s_c = s+'A'-1;
+            string rk2= rk+s_c;
+            mapped(ip.substr(2),rk2);
+         }
+      }
+
+    return;
+}
+
+int main()
+{
+  string str;
+  cin>>str;
+  string rk="";
+  
+  mapped(str,rk);
+
+	return 0;
+}
