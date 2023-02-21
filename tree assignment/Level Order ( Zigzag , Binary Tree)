@@ -1,0 +1,97 @@
+import java.util.*;
+public class Main {
+
+	static Scanner s = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Main mm = new Main();
+		BinaryTree bt = mm.new BinaryTree();
+		List<List<Integer>> rk =bt.levelOrderZigZag();
+		 for(int i=0;i<rk.size();i++)
+          {
+               for(int j=0;j<rk.get(i).size();j++)
+               {
+                    System.out.print(rk.get(i).get(j)+" ");
+               }
+		  }
+          
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+
+		private Node root;
+		private int size;
+
+		public BinaryTree() {
+			this.root = this.takeInput(null, false);
+		}
+
+		public Node takeInput(Node parent, boolean ilc) {
+
+			int cd = s.nextInt();
+			Node child = new Node();
+			child.data = cd;
+			this.size++;
+
+			// left
+			boolean cl = s.nextBoolean();
+
+			if (cl) {
+				child.left = this.takeInput(child, true);
+			}
+
+			// right
+			boolean cr = s.nextBoolean();
+
+			if (cr) {
+				child.right = this.takeInput(child, false);
+			}
+
+			// return
+			return child;
+		}
+
+		public List<List<Integer>> levelOrderZigZag() {
+			
+			if (root == null) {
+            return new ArrayList<>();
+        }
+
+        boolean left = true;
+        Queue<Node> qu = new LinkedList<>();
+        List<List<Integer>> tp = new ArrayList<>();
+        qu.add(root);
+        while (!qu.isEmpty()) {
+            int l = qu.size();
+            List<Integer> tp1 = new ArrayList<>();
+            while (l != 0) {
+                Node cn = qu.remove();
+                tp1.add(cn.data);
+
+                if (cn.left != null) {
+                    qu.add(cn.left);
+                }
+                if (cn.right != null) {
+                    qu.add(cn.right);
+                }
+                l--;
+            }
+
+            if (!left) {
+                Collections.reverse(tp1);
+            }
+            left = !left;
+            tp.add(tp1);
+        }
+		
+		return tp;
+		}
+
+	}
+
+}
