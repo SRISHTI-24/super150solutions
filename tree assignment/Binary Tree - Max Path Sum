@@ -1,0 +1,50 @@
+import java.util.*;
+public class Main {
+
+	static Scanner sc = new Scanner(System.in);
+	static int  max=-9999999;
+	public static void main(String[] args) {
+
+		Node n=takeIp(0);
+        
+        ok(n);
+        
+        System.out.println(max);
+	}
+    static Node takeIp(int i){
+        String t=sc.next();
+        if(t.equals("NULL"))
+            return null;
+        Node x=new Node(Integer.parseInt(t) );
+        x.left=takeIp(i+1);
+        x.right=takeIp(i+1);
+        return x;
+    }
+    private static int ok(Node n){
+        if(n==null)
+            return -9999999;
+        if(n.left==null&&n.right==null)
+            return n.data;
+            
+        int s1=ok(n.left);
+        int s2=ok(n.right);
+        max=Math.max(Math.max(max,Math.max(s1,s2)),s1+s2+n.data);
+       
+        return Math.max(Math.max(s1,s2)+n.data,n.data);
+        }
+        static void print(Node x){
+            if(x==null)return;
+            System.out.print(x.data+" ");
+            print(x.left);
+            print(x.right);
+        }
+
+	}
+    class Node {
+		int data;
+		Node left;
+		Node right;
+        Node(int d){
+            data=d;
+        }
+}
