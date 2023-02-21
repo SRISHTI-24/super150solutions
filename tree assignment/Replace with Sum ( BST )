@@ -1,0 +1,191 @@
+import java.util.*;
+public class Main {
+public static void main(String[] args) {
+        Main mm = new Main();
+        Scanner S = new Scanner(System.in);
+        int nn = S.nextInt();
+        while(nn!=0){
+          int x=S.nextInt();
+          mm.add(x);
+          --nn;
+        }
+ mm.sumwithroot();
+System.out.println(mm);
+}
+    private class Node {
+        int data;
+        Node leftNode;
+        Node lrightNode;
+
+        Node(int data, Node leftNode, Node lrightNode) {
+            this.data = data;
+            this.leftNode = leftNode;
+            this.lrightNode = lrightNode;
+        }
+    }
+
+    private Node root;
+    private int size;
+
+
+    public Main() {
+        this.root = null;
+        this.size = 0;
+    }
+    public int sum=0;
+
+    public void add(int data) {
+        if (this.isEmpty()) {
+            this.root = new Node(data, null, null);
+            this.size++;
+        } else {
+            this.add(this.root, data);
+        }
+    }
+
+    private void add(Node nde, int data) {
+        if (data > nde.data) {
+            if (nde.lrightNode != null) {
+                this.add(nde.lrightNode, data);
+            } else {
+                this.size++;
+                nde.lrightNode = new Node(data, null, null);
+            }
+        } else if (data < nde.data) 
+		{
+            if (nde.leftNode != null) 
+			{
+                this.add(nde.leftNode, data);
+            } 
+			else 
+			{
+                this.size++;
+                nde.leftNode = new Node(data, null, null);
+            }
+        } else {
+             
+        }
+    }
+
+    public void remove(int data) {
+        this.root = this.remove(this.root, data);
+    }
+ 
+    private Node remove(Node nde, int data) {
+        if (nde == null) {
+            return null;
+        }
+
+        if (data > nde.data) {
+            nde.lrightNode = this.remove(nde.lrightNode, data);
+            return nde;
+        } else if (data < nde.data) {
+            nde.leftNode = this.remove(nde.leftNode, data);
+            return nde;
+        } else {
+            
+            if (nde.leftNode == null && nde.lrightNode == null) {
+                this.size--;
+                return null;
+            } else if (nde.leftNode == null) {
+                this.size--;
+                return nde.lrightNode;
+            } else if (nde.lrightNode == null) {
+                this.size--;
+                return nde.leftNode;
+            } else {
+                // both children
+                int lxm = this.max(nde.leftNode);
+                nde.data = lxm;
+                nde.leftNode = this.remove(nde.leftNode, lxm);
+
+                return nde;
+            }
+        }
+    }
+
+    public int size() {
+        return this.size;
+    }
+
+    public boolean isEmpty() {
+        return this.size() == 0;
+    }
+
+    public void display() {
+        System.out.println(this);
+    }
+
+    public int max() {
+        return this.max(this.root);
+    }
+
+    private int max(Node nde) {
+        int rvl = nde.data;
+
+        if (nde.lrightNode != null) {
+            rvl = this.max(nde.lrightNode);
+        }
+
+        return rvl;
+    }
+
+    @Override
+    public String toString() {
+        return this.toString(this.root);
+    }
+  public void sum(Node root){
+        if(root==null){
+            return;
+        }
+        sum(root.leftNode);
+        sum+=root.data;
+        sum(root.lrightNode);
+    }
+    private String toString(Node node) {
+        if (node == null) {
+            return "";
+        }
+        String rk = "";
+
+        if (node.leftNode != null) {
+            rk += node.leftNode.data + " => ";
+        } else {
+            rk += "END" + " => ";
+        }
+
+        rk += node.data;
+
+        if (node.lrightNode != null) 
+		{
+            rk += " <= " + node.lrightNode.data;
+        }
+		else 
+		{
+            rk += " <= " + "END";
+        }
+
+        rk += "\n";
+
+        rk += this.toString(node.leftNode);
+        rk += this.toString(node.lrightNode);
+
+return rk;
+    }
+  public void sumwithroot() {
+        sum(root);
+        krdoTraversal(root);
+    }
+    public void krdoTraversal(Node root){
+     if(root==null){
+         return;
+     }
+     krdoTraversal(root.leftNode);
+     int tp=root.data;
+     root.data=sum-tp;
+     sum-=tp;
+     krdoTraversal(root.lrightNode);
+    }
+
+
+}
