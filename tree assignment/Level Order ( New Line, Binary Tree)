@@ -1,0 +1,100 @@
+import java.util.*;
+public class Main {
+
+	static Scanner s = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Main mm = new Main();
+		BinaryTree bt = mm.new BinaryTree();
+		bt.levelOrderNewLine();
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+
+		private Node root;
+		private int size;
+
+		public BinaryTree() {
+			this.root = this.takeInput(null, false);
+		}
+
+		public Node takeInput(Node parent, boolean ilc) {
+
+			int cd = s.nextInt();
+			Node child = new Node();
+			child.data = cd;
+			this.size++;
+
+			// left
+			boolean cl = s.nextBoolean();
+
+			if (cl) {
+				child.left = this.takeInput(child, true);
+			}
+
+			// right
+			boolean cr = s.nextBoolean();
+
+			if (cr) {
+				child.right = this.takeInput(child, false);
+			}
+
+			// return
+			return child;
+		}
+
+		public void levelOrderNewLine() {
+
+			// write your code here
+			ArrayList<ArrayList<Integer>> rk=new ArrayList<>();
+        	Queue<Node> qu =new LinkedList<>();
+
+        	if(root==null){
+            	return;
+        }
+
+        //add something
+        qu.add(root);
+
+        //rstarting bfs
+        while(!qu.isEmpty()){
+
+            //find the size pf queue will tell us no.of node at particular level
+            int cs = qu.size();
+
+            //process these operation(remove,do something,process children)currentsize times
+			ArrayList<Integer> c =new ArrayList<>();
+            while(cs>0){
+                Node cn=qu.poll();
+                c.add(cn.data);
+
+                //process children
+
+                if(cn.left!=null){
+                    qu.add(cn.left);
+                }
+
+                if(cn.right!=null){
+                    qu.add(cn.right);
+                }
+                cs-=1;
+            }
+			for(int i=0;i<c.size();i++){
+				System.out.print(c.get(i)+" ");
+			}
+			System.out.println();
+            rk.add(c);
+
+        }
+
+		}
+
+		}
+
+	}
+
