@@ -1,0 +1,136 @@
+import java.util.*;
+
+class Node {
+    public int data;
+    public Node next;
+
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+
+class Solution {
+    // head - Head pointer of the Linked List
+    // Return a boolean value indicating the presence of cycle
+    // If the cycle is present, modify the linked list to remove the cycle as well
+    public Node MeetingPoint(Node head) {
+		Node sl = head;
+		Node ft = head;
+		while (ft != null && ft.next != null) {
+			sl = sl.next;
+			ft = ft.next.next;
+			if (sl == ft) {
+				return sl;
+			}
+		}
+		return null;
+
+	}
+  public void CycleRemoval(Node head) {
+
+		Node mt = MeetingPoint(head);
+		if (mt == null) {
+			return;
+		}
+		Node fst = mt;
+
+		Node slo = head;
+		while (slo.next != fst.next) {
+			slo = slo.next;
+			fst = fst.next;
+		}
+		fst.next = null;
+
+	}
+
+
+    boolean floydCycleRemoval(Node head) {
+        Node sl = head;
+			Node ft = head;
+			while (ft != null && ft.next != null) {
+				sl = sl.next;
+				ft = ft.next.next;
+				if (sl == ft) {
+					return true;
+				}
+			}
+			return false;
+
+    }
+
+}
+
+
+/*
+*
+*
+*   You do not need to refer or modify any code below this. 
+*   Only modify the above class definition.
+*	Any modications to code below could lead to a 'Wrong Answer' verdict despite above code being correct.
+*	You do not even need to read or know about the code below.
+*
+*
+*
+*/
+
+public class Main {
+
+    public static Node buildCycleList() {
+        Scanner s = new Scanner(System.in);
+        Hashtable<Integer, Node> hh = new Hashtable<Integer, Node>();
+        int y = s.nextInt();
+        if (y == -1) {
+            return null;
+        }
+        Node head = new Node(y);
+        hh.put(y, head);
+        Node current = head;
+        while (y != -1) {
+            y= s.nextInt();
+            if (y == -1)
+                break;
+            if (hh.containsKey(y)) {
+                current.next = hh.get(y);
+                return head;
+            }
+            Node n = new Node(y);
+            current.next = n;
+            current = n;
+            hh.put(y, n);
+        }
+        current.next = null;
+        return head;
+    }
+
+    public static void printLinkedList(Node head) {
+        HashSet<Integer> ss = new HashSet<Integer>();
+        while (head != null) {
+            if (ss.contains(head.data)) {
+                System.out.println("\nCycle detected at " + head.data);
+                return;
+            }
+            System.out.print(head.data + " ");
+            ss.add(head.data);
+            head = head.next;
+        }
+    }
+  
+    public static void main(String[] args) {
+
+        Node head = buildCycleList();
+        Solution ans = new Solution();
+
+        boolean cyclePresent = ans.floydCycleRemoval(head);
+        if (cyclePresent) {
+            System.out.println("Cycle was present");
+            ans.CycleRemoval(head);
+
+        } else {
+            System.out.println("No cycle");
+        }
+
+        System.out.print("Linked List - ");
+        printLinkedList(head);
+    }
+}
