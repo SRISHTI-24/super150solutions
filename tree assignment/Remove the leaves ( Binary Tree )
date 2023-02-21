@@ -1,0 +1,108 @@
+import java.util.*;
+public class Main {
+
+	static Scanner s = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Main mm = new Main();
+				BinaryTree bt = mm.new BinaryTree();
+		bt.removeLeaf();
+		bt.display();
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+
+		private Node root;
+		private int size;
+
+		public BinaryTree() {
+			this.root = this.takeInput(null, false);
+		}
+
+		public Node takeInput(Node parent, boolean ilc) {
+
+			int cd = s.nextInt();
+			Node child = new Node();
+			child.data = cd;
+			this.size++;
+
+			// left
+			boolean cl = s.nextBoolean();
+
+			if (cl) {
+				child.left = this.takeInput(child, true);
+			}
+
+			// right
+			boolean cr = s.nextBoolean();
+
+			if (cr) {
+				child.right = this.takeInput(child, false);
+			}
+
+			// return
+			return child;
+		}
+
+		public void display() {
+			this.display(this.root);
+		}
+
+		private void display(Node node) {
+			if (node == null) {
+				return;
+			}
+
+			String s = "";
+
+			if (node.left != null) {
+				s += node.left.data;
+			} else {
+				s += "END";
+			}
+
+			s += " => " + node.data + " <= ";
+
+			if (node.right != null) {
+				s += node.right.data;
+			} else {
+				s += "END";
+			}
+
+			System.out.println(s);
+
+			this.display(node.left);
+			this.display(node.right);
+		}
+
+		public void removeLeaf() {
+			this.removeLeaf(null, this.root, false);
+		}
+
+		private void removeLeaf(Node parentnode, Node childnode, boolean isleaf) {
+          if(childnode==null){
+				 return;
+			 }
+			 if(childnode.left==null && childnode.right==null){
+              if(isleaf==true){
+				  parentnode.left=null;
+			  }
+			  else{
+				  parentnode.right=null;
+			  }
+			  return;
+				
+			 }
+
+			 removeLeaf(childnode,childnode.left,true);
+			 removeLeaf(childnode,childnode.right,false);
+		}
+
+	}
+
+}
