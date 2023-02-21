@@ -1,0 +1,32 @@
+import java.util.*;
+public class Main{
+public static void main(String args[]){
+    Scanner s=new Scanner(System.in);
+     int l=s.nextInt();
+     int a[]=new int [l];
+     for(int i=0;i<a.length;i++){
+         a[i]=s.nextInt();
+     }
+     System.out.println(largestRectangleArea(a));
+}
+ public static int largestRectangleArea(int[] hts) {
+      
+        int l = hts.length;
+        Stack<Integer> sk = new Stack<>();
+        int ma = 0;
+        for (int i = 0; i <= l; i++){
+            int t = (i == l ? 0 : hts[i]);
+            if (sk.isEmpty() || t >= hts[sk.peek()]) 
+            {
+                sk.push(i);
+            } 
+            else 
+            {
+                int pp = sk.pop();
+                ma = Math.max(ma, hts[pp] * (sk.isEmpty() ? i : i - 1 - sk.peek()));
+                i--;
+            }
+        }
+        return ma;
+    }
+}
