@@ -1,0 +1,72 @@
+import java.util.*;
+public class Main {
+
+	static Scanner s = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Main mm = new Main();
+		BinaryTree b1 = mm.new BinaryTree();
+		BinaryTree b2 = mm.new BinaryTree();
+		System.out.println(b1.structurallyIdentical(b2));
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+
+		private Node root;
+		private int size;
+
+		public BinaryTree() {
+			this.root = this.takeInput(null, false);
+		}
+
+		public Node takeInput(Node parent, boolean bl) {
+
+			int cd = s.nextInt();
+			Node child = new Node();
+			child.data = cd;
+			this.size++;
+
+			// left
+			boolean cl = s.nextBoolean();
+
+			if (cl) {
+				child.left = this.takeInput(child, true);
+			}
+
+			// right
+			boolean cr = s.nextBoolean();
+
+			if (cr) {
+				child.right = this.takeInput(child, false);
+			}
+
+			// return
+			return child;
+		}
+
+		public boolean structurallyIdentical(BinaryTree other) {
+			return this.structurallyIdentical(this.root, other.root);
+		}
+
+		private boolean structurallyIdentical(Node r, Node k) {
+			// write your code here
+			if(r==null && k==null){
+            return true;
+        }
+		if(r==null || k==null || r.data==k.data){
+            return true;
+        }
+		
+        if(r==null || k==null || r.data!=k.data){
+            return false;
+        }
+        return structurallyIdentical(r.left,k.left) && structurallyIdentical(r.right,k.right);
+		}
+
+	}
+}
