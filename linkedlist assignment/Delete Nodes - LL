@@ -1,0 +1,241 @@
+import java.util.*;
+
+class Main {
+	static class LinkedList {
+		public void deleteLarger() throws Exception {
+            Stack<Node> sk=new Stack<>();
+			Node tp=head;
+			while(tp!=null){
+				sk.push(tp);
+				tp=tp.next;
+			}
+			head=sk.pop();
+			head.next=null;
+			while(!sk.isEmpty()){
+				Node rk=sk.pop();
+				if(rk.data>=head.data){
+					rk.next=head;
+					head=rk;
+				}
+
+			}
+		}
+
+		//  You dont need to read the code below.
+
+		private class Node {
+			int data;
+			Node next;
+
+			Node(int data, Node next) {
+				this.data = data;
+				this.next = next;
+			}
+		}
+
+		private Node head;
+		private Node tail;
+		private int size;
+
+		public LinkedList() {
+			this.head = null;
+			this.tail = null;
+			this.size = 0;
+		}
+
+		public LinkedList(Node head, Node tail, int size) {
+			this.head = head;
+			this.tail = tail;
+			this.size = size;
+		}
+		public int size() {
+			return this.size;
+		}
+
+		
+		public boolean isEmpty() {
+			return this.size() == 0;
+		}
+
+		
+		public int getFirst() throws Exception {
+			if (this.isEmpty()) {
+				throw new Exception("List is empty.");
+			}
+
+			return this.head.data;
+		}
+
+
+		public int getLast() throws Exception {
+			if (this.isEmpty()) {
+				throw new Exception("List is empty.");
+			}
+
+			return this.tail.data;
+		}
+
+		
+		public int getAt(int ix) throws Exception {
+			Node tp = this.getNodeAt(ix);
+			return tp.data;
+		}
+
+		
+		private Node getNodeAt(int ix) throws Exception {
+			if (this.isEmpty()) {
+				throw new Exception("List is empty");
+			}
+
+			if (ix < 0 || ix >= this.size()) {
+				throw new Exception("Invalid arguments");
+			}
+
+			Node rv = this.head;
+			for (int i = 0; i < ix; i++) {
+				rv = rv.next;
+			}
+
+			return rv;
+		}
+
+		
+		public void addFirst(int data) {
+			Node nd = new Node(data, this.head);
+
+			if (this.size() == 0) {
+				this.head = nd;
+				this.tail = nd;
+			} else {
+				this.head = nd;
+			}
+
+			this.size++;
+		}
+
+	
+		public void addLast(int data) {
+			Node nd = new Node(data, null);
+
+			if (this.size() == 0) {
+				this.head = nd;
+				this.tail = nd;
+			} else {
+				this.tail.next = nd;
+				this.tail = nd;
+			}
+
+			this.size++;
+		}
+
+	
+		public void addAt(int ix, int data) throws Exception {
+			if (ix < 0 || ix > this.size()) {
+				throw new Exception("Invalid arguments");
+			}
+
+			if (ix == 0) {
+				this.addFirst(data);
+			} else if (ix == this.size()) {
+				this.addLast(data);
+			} else {
+				Node n1 = this.getNodeAt(ix - 1);
+				Node nn = n1.next;
+
+				Node nd = new Node(data, nn);
+				n1.next = nd;
+
+				this.size++;
+			}
+		}
+
+		
+		public int removeFirst() throws Exception {
+			if (this.isEmpty()) {
+				throw new Exception("List is empty");
+			}
+
+			int rv = this.head.data;
+
+			if (this.size() == 1) {
+				this.head = null;
+				this.tail = null;
+			} else {
+				this.head = this.head.next;
+			}
+
+			this.size--;
+			return rv;
+		}
+
+		
+		public int removeLast() throws Exception {
+			if (this.isEmpty()) {
+				throw new Exception("List is empty");
+			}
+
+			int rv= this.tail.data;
+
+			if (this.size() == 1) {
+				this.head = null;
+				this.tail = null;
+			} else {
+				Node s2 = this.getNodeAt(this.size() - 2);
+				s2.next = null;
+				this.tail = s2;
+			}
+
+			this.size--;
+			return rv;
+		}
+	
+		public int removeAt(int ix) throws Exception {
+			if (this.isEmpty()) {
+				throw new Exception("List is empty");
+			}
+
+			if (ix < 0 || ix >= this.size()) {
+				throw new Exception("Invalid arguments");
+			}
+
+			if (ix == 0) {
+				return this.removeFirst();
+			} else if (ix == this.size() - 1) {
+				return this.removeLast();
+			} else {
+				Node n1 = this.getNodeAt(ix - 1);
+				Node nn = n1.next;
+				Node npp1 = nn.next;
+
+				n1.next = npp1;
+				this.size--;
+
+				return nn.data;
+			}
+		}
+
+	
+		public void display() {
+			Node node = this.head;
+
+			while (node != null) {
+				System.out.print(node.data + " ");
+				node = node.next;
+			}
+		}
+	}
+	public static void main(String[] args) throws Exception {
+
+			Scanner s = new Scanner(System.in);
+			int n = s.nextInt();
+
+			LinkedList lt = new LinkedList();
+
+			for (int i = 0; i < n; i++) {
+				lt.addLast(s.nextInt());
+			}
+
+			lt.deleteLarger();
+			lt.display();
+		}
+}
