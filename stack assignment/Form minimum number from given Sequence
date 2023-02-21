@@ -1,0 +1,38 @@
+import java.util.*;
+public class Main {
+	public static void main(String[] args) {
+		 Scanner s=new Scanner(System.in);
+		 int l= s.nextInt();
+		 int a[]=new int[l];
+		 for(int i=0;i<a.length;i++){
+			 String sr=s.next();
+			 System.out.println(FormNumber(sr));
+		 }
+	}
+	public static String FormNumber(String str) 
+	{
+		int[] rk = new int[str.length() + 1];
+		int c = 1;
+		Stack<Integer> sk= new Stack<>();
+		for (int i = 0; i <= str.length(); i++) 
+		{
+			if (i == str.length() || str.charAt(i) == 'I') 
+			{
+				rk[i] = c++;
+				while (!sk.isEmpty()) 
+				{
+					rk[sk.pop()] = c++;
+				}
+			} 
+			else 
+			{
+				sk.push(i);
+			}
+		}
+		String ss = "";
+		for (int v : rk) {
+			ss += v;
+		}
+		return ss;
+	}
+}
