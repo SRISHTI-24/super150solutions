@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Main{
+
+	public static void main(String[] args) {
+		 
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int q = sc.nextInt();
+		Stack<Integer> st = new Stack<>();
+		for (int i = 0; i < n; i++) {
+			st.push(sc.nextInt());
+		}
+		 
+		Playingwithcards(st, q);
+
+	}
+
+	public static void Playingwithcards(Stack<Integer> sk, int rk) {
+		Stack<Integer> x = new Stack<>();
+		Stack<Integer> y = new Stack<>();
+		ArrayList<Integer> lt = new ArrayList<>();
+		findPrimes(lt);
+
+		for (int i = 1; i <= rk; i++) {
+			int t = lt.get(i - 1);
+			while (!sk.isEmpty()) {
+				int i2 = sk.pop();
+				if (i2 % t == 0) {
+					y.push(i2);
+				} else {
+					x.push(i2);
+				}
+
+			}
+
+			while (!y.isEmpty()) {
+				System.out.println(y.pop());
+
+			}
+			sk = x;
+			x = new Stack<>();
+
+		}
+		while (!sk.isEmpty()) {
+			System.out.println(sk.pop());
+
+		}
+	}
+
+	public static void findPrimes(ArrayList<Integer> p1) {
+		boolean[] p = new boolean[100001];
+		p[0] = true;
+		p[1] = true;
+		for (int i = 2; i * i <= 100000; i++) {
+			if (p[i] == false) {
+				p1.add(i);
+				for (int j = 2; j * i <= 100000; j++) {
+					p[i * j] = true;
+				}
+			}
+		}
+		for (int i = 2; i <= 100000; i++) {
+			if (!p[i]) {
+				p1.add(i);
+			}
+		}
+	}
+
+}
