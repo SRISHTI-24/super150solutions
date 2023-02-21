@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) {
+
+		Scanner s = new Scanner(System.in);
+
+		int t = s.nextInt();
+
+		while (t > 0) {
+			int l = s.nextInt();
+			int[] a = new int[l];
+
+			for (int i = 0; i < a.length; i++)
+				a[i] = s.nextInt();
+
+			nextLarger(a,l);
+
+			t--;
+		}
+
+	}
+
+	// Function to print Next Greater Element for each element of the array
+	public static void nextLarger(int[] a,int l) {
+        Stack<Integer> sk = new Stack<>();
+        int rk[] =new int[l];
+        for(int i=0;i<l;i++)
+        {
+            while(!sk.isEmpty() && a[i]>a[sk.peek()])
+            {
+               rk[sk.peek()]=a[i];
+                sk.pop();
+            }
+            sk.push(i);
+        }
+        while(!sk.isEmpty())
+        {
+           rk[sk.peek()]=-1;
+            sk.pop();
+        }
+        for(int i=0;i<l;i++)
+        {
+            System.out.println(a[i]+","+rk[i]);
+        }
+
+// Write Code here
+
+	}
+}
