@@ -1,0 +1,81 @@
+import java.util.*;
+public class Main {
+    public class Node {
+        int data;
+        Node leftNode;
+        Node rightNode;
+    }
+
+    private Node rootNode;
+   
+
+    public Main() {
+        this.rootNode = Create__REET();
+    }
+
+    private Node Create__REET() {
+        Queue<Node> qq = new LinkedList<>();
+        Node nd = new Node();
+        nd.data = s.nextInt();
+        rootNode = nd;
+        qq.add(nd);
+        while (!qq.isEmpty()) {
+
+
+            Node n = qq.remove();
+
+            int x1 = s.nextInt();
+
+            int x2 = s.nextInt();
+            if (x1 != -1) {
+
+                Node nde = new Node();
+                nde.data = x1;
+                n.leftNode = nde;
+                qq.add(nde);
+
+            }
+            if (x2 != -1) {
+
+                Node nde = new Node();
+                nde.data = x2;
+                n.rightNode = nde;
+                qq.add(nde);
+            }
+
+        }
+        return rootNode;
+
+    }
+static Scanner s = new Scanner(System.in);
+
+    static ArrayList<Integer> a = new ArrayList<>();
+    
+    public int maximumpathsum(Node rootNode, int sm)
+    {
+
+        if(rootNode == null) 
+            return 0;
+        int lsm = maximumpathsum(rootNode.leftNode, sm);
+        int rsm = maximumpathsum(rootNode.rightNode, sm);
+        int sle = Math.max(Math.max(lsm,rsm)+rootNode.data, rootNode.data);
+        int s1 = Math.max(sle, lsm + rsm +rootNode.data);
+        sm = Math.max(sm, s1);
+        a.add(sm);
+        return sle;
+    }
+    
+    public int helpTree(Node rootNode){
+        int smm = Integer.MIN_VALUE;
+        maximumpathsum(rootNode,smm);
+        return smm;
+    }
+    public static void main (String args[]) {
+        Main oj = new Main();
+        int sm = Integer.MIN_VALUE;
+        oj.maximumpathsum(oj.rootNode, sm);
+        for(int i=0; i<a.size(); i++) 
+            sm = Math.max(sm, a.get(i));
+        System.out.println(sm);
+    }
+}
