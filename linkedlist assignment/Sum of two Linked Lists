@@ -1,0 +1,131 @@
+import java.io.*;
+import java.util.*;
+  
+public class Main{
+      
+static class Node
+{
+    int data;
+    Node next;
+      
+    public Node(int data)
+    { 
+        this.data = data;
+    }
+}
+  
+static Node n1, n2, result;
+
+public static void push(int new_data)
+{
+    Node nn = new Node(0);
+    nn.data = new_data;
+    nn.next = n1;
+    n1 = nn;
+}
+  
+public static void push1(int new_data)
+{
+    Node nn = new Node(0);
+    nn.data = new_data;
+    nn.next = n2;
+    n2 = nn;
+}
+
+public static Node addNumbers()
+{
+    Stack<Integer> sk1 = new Stack<>();
+    Stack<Integer> sk2 = new Stack<>();
+  
+    while (n1 != null)
+    {
+        sk1.add(n1.data);
+        n1 = n1.next;
+    }
+  
+    while (n2 != null) 
+    {
+        sk2.add(n2.data);
+        n2 = n2.next;
+    }
+  
+    int cy = 0;
+    Node rt = null;
+  
+    while (!sk1.isEmpty() ||
+           !sk2.isEmpty()) 
+    {
+        int x = 0, y = 0;
+  
+        if (!sk1.isEmpty()) 
+        {
+            x = sk1.pop();
+        }
+  
+        if (!sk2.isEmpty()) 
+        {
+            y = sk2.pop();
+        }
+  
+        int tl = x + y + cy;
+  
+        Node tp = new Node(tl % 10);
+        cy = tl / 10;
+  
+        if (result == null) 
+        {
+            result = tp;
+        }
+        else
+        {
+            tp.next = result;
+            result = tp;
+        }
+    }
+  
+    if (cy != 0)
+    {
+        Node tp = new Node(cy);
+        tp.next = result;
+        result = tp;
+    }
+    return result;
+}
+  
+public static void display()
+{
+    while (result != null) 
+    {
+        System.out.print(result.data + " ");
+        result = result.next;
+    }
+    System.out.println();
+}
+
+public static void main(String[] args)
+{
+	Scanner s=new Scanner(System.in);
+   int x=s.nextInt();
+   int y=s.nextInt();
+   int[] arry1=new int[x];
+   int[] arry2=new int[y];
+   
+  
+  for(int i=0;i<x;i++){
+	  arry1[i]=s.nextInt();
+  }
+  for(int i=0;i<y;i++){
+	  arry2[i]=s.nextInt();
+  }
+ 
+    int i;
+    for(i = x - 1; i >= 0; --i)
+        push(arry1[i]);
+    for(i = y - 1; i >= 0; --i)
+        push1(arry2[i]);
+  
+    result = addNumbers();
+  
+    display();
+}
+}
