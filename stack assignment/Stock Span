@@ -1,0 +1,41 @@
+import java.util.*;
+public class Main {
+
+	public static void main(String args[])  
+	{
+		Scanner s = new Scanner(System.in);
+		int l = s.nextInt();
+		int []a= new int[l];
+		for(int i=0;i<l;i++)
+		{
+			a[i]= s.nextInt();
+		}
+		Stack<Integer> sk= new Stack<>();
+		int rk[] = new int[l];
+		for(int i=0;i<l;i++)
+		{
+			while(!sk.isEmpty() && a[i]>=a[sk.peek()])
+			{
+				sk.pop();
+			}
+			if(!sk.isEmpty())
+			{
+				rk[i]= i-sk.peek();
+			}
+			else
+			{
+				rk[i]=i+1;
+			}
+			sk.push(i);
+		}
+		for(int i:rk)
+		{
+			System.out.print(i+" ");
+		}
+		System.out.print("END");
+		
+	
+
+	}
+
+}
