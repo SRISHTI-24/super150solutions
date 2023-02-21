@@ -1,0 +1,87 @@
+import java.util.*;
+@SuppressWarnings("unchecked")
+public class Main {
+    public class Node {
+        int data;
+        Node left;
+        Node right;
+    }
+
+    private Node root;
+     
+
+    public Main() {
+        this.root = Create_Tree();
+    }
+static int sum=0;
+    private Node Create_Tree() {
+        Scanner s = new Scanner(System.in);
+        Queue<Node> qu = new LinkedList<>();
+        Node nd = new Node();
+        nd.data = s.nextInt();
+        root = nd;
+        qu.add(nd);
+        while (!qu.isEmpty()) {
+            Node a = qu.remove();
+            int x1 = s.nextInt();
+            int x2 = s.nextInt();
+            if (x1 != -1) {
+                Node node = new Node();
+                node.data = x1;
+                a.left = node;
+                qu.add(node);
+            }
+            if (x2 != -1) {
+                Node node = new Node();
+                node.data = x2;
+                a.right = node;
+                qu.add(node);
+            }
+        }
+        sum=s.nextInt();
+        return root;
+    }
+
+    
+    
+    public void roottoleafpath(Node root) {
+        
+        
+        List<Integer> lt2=new ArrayList(); 
+        List<List<Integer>> rk=new ArrayList<>();
+        listpath(root,sum,lt2,rk);    
+        System.out.println(rk.size());
+    }
+    public void listpath(Node root,int sum,List<Integer> lt2,List<List<Integer>>rk)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        lt2.add(root.data);
+        if(root.left==null && root.right==null)
+        {
+            if(sum-root.data==0)
+            {
+                rk.add(new ArrayList(lt2));
+                return;
+            }
+        }
+
+        if(root.left!=null)
+        {
+            listpath(root.left,sum-root.data,lt2,rk);
+            lt2.remove(lt2.size()-1);
+        }
+        if(root.right!=null)
+        {
+            listpath(root.right,sum-root.data,lt2,rk);
+            lt2.remove(lt2.size()-1);
+        }
+    }
+    public static void main(String[] args) {
+        Main mm = new Main();
+        
+        mm.roottoleafpath(mm.root);
+    }
+}
