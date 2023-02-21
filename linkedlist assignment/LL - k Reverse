@@ -1,0 +1,70 @@
+import java.util.*;
+import java.util.*;
+class LinkedList{
+    public class Node{
+        int val;
+        Node next;
+    }
+    public Node head;
+    public Node tail;
+    public int size;
+    public void addlast(int item){
+        Node nn=new Node();
+        nn.val=item;
+        if(size==0){
+            head=nn;
+            tail=nn;
+            size++;
+        }
+        else{
+            tail.next=nn;
+            tail=nn;
+            size++;
+        }
+    }
+    public void display() {
+		Node tp = head;
+		while (tp != null) {
+			System.out.print(tp.val + " ");
+			tp = tp.next;
+		}
+	}
+    public Node reverseKGroups(Node head,int rk){
+		 Stack<Node> sk=new Stack<>();
+         Node D=new Node();
+         Node t=D;
+         Node st=head;
+         while(head!=null){
+            if(sk.size()==0){
+               st=head;
+            }
+            sk.push(head);
+            if(sk.size()==rk){
+                while(!sk.isEmpty()){
+                    Node n=new Node();
+                    n.val=sk.pop().val;
+                    D.next=n;
+                    D=D.next;
+                }
+            }
+            head=head.next;
+         }
+         if(sk.size()>0){
+            D.next=st;
+         }
+         return t.next;
+    }
+}
+public class Main {
+    public static void main (String args[]) {
+        LinkedList lt=new LinkedList();
+		Scanner s=new Scanner(System.in);
+		int t=s.nextInt();
+		int r=s.nextInt();
+		for(int i=0;i<t;i++){
+		lt.addlast(s.nextInt());
+		}
+		lt.head=lt.reverseKGroups(lt.head,r);
+		lt.display();
+    }
+}
