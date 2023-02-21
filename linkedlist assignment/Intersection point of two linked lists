@@ -1,0 +1,113 @@
+import java.util.*;
+
+class Node {
+    public int data;
+    public Node next;
+
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+
+class Solution {
+    // This function gets two arguments - the head pointers of the two linked lists
+    // Return the node which is the intersection point of these linked lists
+    // It is assured that the two lists intersect
+    Node intersectionOfTwoLinkedLists(Node r1, Node r2) {
+        /* Code here */
+         if(r1== null || r2 == null) 
+            return null;
+    
+    Node p = r1;
+    Node q = r2;
+    while( p != q){
+    	
+        p = p == null? r1 : p.next;
+        q = q == null? r2 : q.next;    
+    }
+    
+    return p;
+    
+    }
+
+}
+
+/*
+*
+*
+*   You do not need to refer or modify any code below this. 
+*   Only modify the above class definition.
+*	Any modications to code below could lead to a 'Wrong Answer' verdict despite above code being correct.
+*	You do not even need to read or know about the code below.
+*
+*
+*
+*/
+
+public class Main {
+
+    static Scanner s = new Scanner(System.in);
+
+    public static Node buildList(HashMap<Integer, Node> hash) {
+        int y = s.nextInt();
+        Node head = new Node(y);
+        Node current = head;
+        hash.put(y, head);
+        while (y != -1) {
+            y = s.nextInt();
+            if (y == -1)
+                break;
+            Node n = new Node(y);
+            hash.put(y, n);
+            current.next = n;
+            current = n;
+        }
+        current.next = null;
+        return head;
+    }
+
+    public static void printLinkedList(Node head) {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        HashMap<Integer, Node> h = new HashMap<Integer, Node>();
+        Node n1 = buildList(h);
+
+        Node n2 = null;
+        int x = s.nextInt();
+        n2 = new Node(x);
+        Node temp = n2;
+
+        while (x != -1) {
+            x = s.nextInt();
+            if (x == -1)
+                break;
+            if (h.containsKey(x)) {
+                temp.next = h.get(x);
+                break;
+            }
+            Node nn = new Node(x);
+            temp.next = nn;
+            temp = nn;
+        }
+
+        System.out.print("L1 - ");
+        printLinkedList(n1);
+        System.out.print("L2 - ");
+        printLinkedList(n2);
+
+        Solution ss = new Solution();
+
+        Node intersectionPoint = ss.intersectionOfTwoLinkedLists(n1, n2);
+        System.out.println("Intersection at node with data = " + intersectionPoint.data);
+
+    }
+}
