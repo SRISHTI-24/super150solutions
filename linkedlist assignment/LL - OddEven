@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+int main() {
+	int n;
+	cin>>n;
+	struct node{
+		int data;
+		struct node *next;
+	};
+	struct node *newnode, *head, *temp;
+	head=0;
+	while(n--)
+	{
+		newnode = (struct node*)malloc(sizeof(struct node));
+		cin>>newnode->data;
+		if(head==0)
+		{
+			head=temp=newnode;
+		}
+		else{
+			temp->next=newnode;
+			temp=newnode;
+		}
+	}
+	struct node *temp1=head;
+	while(temp1->next!=0)
+	{
+		if(temp1->data%2!=0)
+		cout<<temp1->data<<" ";
+		temp1=temp1->next;
+	}
+	struct node *temp2=head;
+	while(temp2->next!=0)
+	{
+		if(temp2->data%2==0)
+		cout<<temp2->data<<" ";
+		temp2=temp2->next;
+	}
+
+	return 0;
+}
