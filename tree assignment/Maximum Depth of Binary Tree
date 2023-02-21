@@ -1,0 +1,68 @@
+import java.util.*;
+public class Main {
+
+	static Scanner s = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Main mn = new Main();
+		BinaryTree bb = mn.new BinaryTree();
+		bb.levelOrderZZ();
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+
+		private Node root;
+		private int size;
+
+		public BinaryTree() {
+			this.root = this.takeInput(null, false);
+		}
+
+		public Node takeInput(Node parent, boolean ic) {
+
+			int cd = s.nextInt();
+			Node ch = new Node();
+			ch.data = cd;
+			this.size++;
+
+			// left
+			boolean cl = s.nextBoolean();
+
+			if (cl) {
+				ch.left = this.takeInput(ch, true);
+			}
+
+			// right
+			boolean cr = s.nextBoolean();
+
+			if (cr) {
+				ch.right = this.takeInput(ch, false);
+			}
+
+			// return
+			return ch;
+		}
+
+		public void levelOrderZZ() {
+			
+			// write your code here
+			System.out.println(depth(root));
+		}
+        public int depth(Node root){
+			if(root==null){
+				return 0;
+			}
+			int lt=depth(root.left);
+			int rt=depth(root.right);
+			return Math.max(lt,rt)+1;
+		}
+	}
+
+	
+
+}
