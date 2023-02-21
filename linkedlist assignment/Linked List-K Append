@@ -1,0 +1,65 @@
+import java.util.*;
+class LinkedList{
+    public class Node{
+        int val;
+        Node next;
+    }
+    public Node head;
+    public Node tail;
+    public int size;
+    public void addlast(int item){
+        Node nn=new Node();
+        nn.val=item;
+        if(size==0){
+            head=nn;
+            tail=nn;
+            size++;
+         }
+         else{
+              tail.next=nn;
+              tail=nn;
+              size++;
+         }
+    }
+    public void display() {
+		Node tp = head;
+		while (tp != null) {
+			System.out.print(tp.val + " ");
+			tp = tp.next;
+		}
+		
+	}
+	public void last(int rk){
+		for(int i=0;i<rk;i++){
+			lastToFirst();
+		}
+	}
+   public void lastToFirst(){
+
+        if(head==null||head.next==null){
+            return;
+        }
+        Node tp=head;
+        Node pr=null;
+        while(tp.next!=null){ 
+            pr=tp;
+           tp=tp.next;
+        }
+        pr.next=null;
+        tp.next=head;
+        head=tp;
+    }    
+}
+public class Main{
+    public static void main(String[] args){
+       LinkedList lt=new LinkedList();
+       Scanner s=new Scanner(System.in);
+	   int t=s.nextInt();
+	   for(int i=0;i<t;i++){
+       lt.addlast(s.nextInt());
+	   }
+       int rk=s.nextInt();
+	     lt.last(rk);
+		 lt.display();
+	}
+}
